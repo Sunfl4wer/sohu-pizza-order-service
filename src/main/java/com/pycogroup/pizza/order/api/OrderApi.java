@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.pycogroup.pizza.order.common.ErrorResponseBody;
 import com.pycogroup.pizza.order.common.GenericResponse;
+import com.pycogroup.pizza.order.common.GenericResponseError;
+import com.pycogroup.pizza.order.common.LinkEntity;
+import com.pycogroup.pizza.order.common.Links;
 import com.pycogroup.pizza.order.common.ResponseDto;
 import com.pycogroup.pizza.order.model.Order;
 import com.pycogroup.pizza.order.service.OrderService;
@@ -35,18 +39,27 @@ public class OrderApi {
       UriComponentsBuilder ucb) {
     String baseUri = ucb.build().toString();
     HttpHeaders headers = new HttpHeaders();
-    URI locationUri = URI.create(baseUri + "/orders");
+    URI locationUri = URI.create(baseUri + "/pizza/orders");
     headers.setLocation(locationUri);
     Object response = orderService.createOrder(order);
+    Links links = new Links();
+    links.add(LinkEntity.builder().href(locationUri).relation("Self").method(RequestMethod.POST).build());
     if (response instanceof GenericResponse) {
       
-      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(((GenericResponse) response).getData()).build(),
+      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(((GenericResponse) response).getData()).links(links).build(),
                                       headers,
                                       HttpStatus.CREATED);
     } else {
-      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).data(response).build(),
+      ErrorResponseBody responseError = (ErrorResponseBody)((GenericResponseError) response).getData();
+      if (responseError.getCode() == HttpStatus.UNAUTHORIZED.value()) {
+        return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.UNAUTHORIZED.value()).data(response).links(links).build(),
+                                      headers,
+                                      HttpStatus.UNAUTHORIZED);
+      } else {
+        return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).data(response).links(links).build(),
                                       headers,
                                       HttpStatus.INTERNAL_SERVER_ERROR);
+      }
       
     }
   }
