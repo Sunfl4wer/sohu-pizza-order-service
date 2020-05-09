@@ -37,7 +37,7 @@ public class UserInfo {
 
   @Getter
   @Setter
-  private String expireDate;
+  private String expire;
 
   @Getter
   @Setter

@@ -29,27 +29,16 @@ public class OrderServiceImpl implements OrderService{
   public GenericResponse createOrder(Order order) {
     String cardNumber = "123456";
     String securityCode = "123456";
+    String nameOnCard = "Sohu Pizza";
+    String expire = "07/2020";
     Order createdOrder = null;
-    if (order.getUserInfo().getCardNumber().equals(cardNumber) && order.getUserInfo().getSecurity().equals(securityCode)) {
-      createdOrder = orderRepository.save(order);
-      if (orderRepository.existsById(createdOrder.getId())) {
-        return new GenericResponse("Order Created Successfully!");
+    if (order.getUserInfo().getMethod().equals("creditCard")) {
+      if (order.getUserInfo().getCardNumber().equals(cardNumber) 
+          && order.getUserInfo().getSecurity().equals(securityCode)
+          && order.getUserInfo().getExpire().equals(expire)
+          && order.getUserInfo().getNameOnCard().equals(nameOnCard)) {
+        createdOrder = orderRepository.save(order);
       } else {
-        LinkedHashMap<String , Object> where = new LinkedHashMap<String , Object>();
-        where.put("orderInfo", order);
-        LinkedHashMap<String , Object> when = new LinkedHashMap<String , Object>();
-        when.put("Internal Error", "orderInfo saved fail!");
-        return new GenericResponseError(ErrorResponseBody.builder()
-                                              .timestamp(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")))
-                                              .status(HttpStatus.NOT_FOUND)
-                                              .code(HttpStatus.NOT_FOUND.value())
-                                              .message(Message.DOCUMENT_NOT_EXIST.getMessage())
-                                              .reason(Reason.DOCUMENT_NOT_SAVED.getReason())
-                                              .where(where)
-                                              .when(when)
-                                              .build());
-      }
-    } else {
         LinkedHashMap<String , Object> where = new LinkedHashMap<String , Object>();
         where.put("cardNumber", order.getUserInfo().getCardNumber());
         where.put("security", order.getUserInfo().getSecurity());
@@ -64,7 +53,26 @@ public class OrderServiceImpl implements OrderService{
                                               .where(where)
                                               .when(when)
                                               .build());
+      }
+    } else {
+        createdOrder = orderRepository.save(order);
     }
-
+    if (orderRepository.existsById(createdOrder.getId())) {
+      return new GenericResponse("Order Created Successfully!");
+    } else {
+      LinkedHashMap<String , Object> where = new LinkedHashMap<String , Object>();
+      where.put("orderInfo", order);
+      LinkedHashMap<String , Object> when = new LinkedHashMap<String , Object>();
+      when.put("Internal Error", "orderInfo saved fail!");
+      return new GenericResponseError(ErrorResponseBody.builder()
+                                            .timestamp(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")))
+                                            .status(HttpStatus.NOT_FOUND)
+                                            .code(HttpStatus.NOT_FOUND.value())
+                                            .message(Message.DOCUMENT_NOT_EXIST.getMessage())
+                                            .reason(Reason.DOCUMENT_NOT_SAVED.getReason())
+                                            .where(where)
+                                            .when(when)
+                                            .build());
+    }
   }
 }
