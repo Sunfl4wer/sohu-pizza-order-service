@@ -9,7 +9,7 @@ import lombok.Setter;
 
 public class OrderDto {
 
-  public OrderDto(UserInfo userInfo, List<?> cartInfo) {
+  public OrderDto(UserInfo userInfo, List<ProductDto> cartInfo) {
     super();
     this.userInfo = userInfo;
     this.cartInfo = cartInfo;
@@ -21,5 +21,5 @@ public class OrderDto {
 
   @Getter
   @Setter
-  private List<?> cartInfo;
+  private List<ProductDto> cartInfo;
 }
