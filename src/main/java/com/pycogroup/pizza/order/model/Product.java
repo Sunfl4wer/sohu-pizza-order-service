@@ -14,7 +14,7 @@ public class Product {
 
   @Getter
   @Setter
-  private String productId;
+  private String id;
 
   @Getter
   @Setter

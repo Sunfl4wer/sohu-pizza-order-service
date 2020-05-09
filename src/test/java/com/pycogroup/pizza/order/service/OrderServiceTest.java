@@ -74,7 +74,7 @@ public class OrderServiceTest {
                                  .additionalOption(new AdditionalOption(option,optionPrice,0))
                                  .category(Category.PIZZA)
                                  .quantity(1)
-                                 .productId("5eb53755c9cb6804f57f9045")
+                                 .id("5eb53755c9cb6804f57f9045")
                                  .build();
     List<ProductDto> products = new ArrayList<>();
     products.add(product);

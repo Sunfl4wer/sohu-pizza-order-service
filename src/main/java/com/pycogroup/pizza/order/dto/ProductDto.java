@@ -19,7 +19,7 @@ public class ProductDto {
 
   @Getter
   @Setter
-  private String productId;
+  private String id;
 
   @Getter
   @Setter
@@ -48,7 +48,7 @@ public class ProductDto {
   public Product toProduct() {
     if (this.category.equals(Category.PIZZA)) {
       return Product.builder()
-        .productId(this.productId)
+        .id(this.id)
         .name(this.name)
         .imageURL(this.imageURL)
         .pricing((Pricing)this.pricing)
@@ -68,7 +68,7 @@ public class ProductDto {
       optionPrices.add(0);
       AdditionalOption additionalOption = new AdditionalOption(options,optionPrices,0);
       return Product.builder()
-        .productId(this.productId)
+        .id(this.id)
         .name(this.name)
         .imageURL(this.imageURL)
         .pricing(pricing)
