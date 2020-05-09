@@ -41,6 +41,8 @@ public class OrderServiceImpl implements OrderService{
       } else {
         LinkedHashMap<String , Object> where = new LinkedHashMap<String , Object>();
         where.put("cardNumber", order.getUserInfo().getCardNumber());
+        where.put("nameOnCard", order.getUserInfo().getNameOnCard());
+        where.put("expire", order.getUserInfo().getExpire());
         where.put("security", order.getUserInfo().getSecurity());
         LinkedHashMap<String , Object> when = new LinkedHashMap<String , Object>();
         when.put("validation", "Invalid!");
