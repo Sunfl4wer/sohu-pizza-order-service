@@ -12,13 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.pycogroup.pizza.order.common.GenericResponse;
-import com.pycogroup.pizza.order.model.AdditionalOption;
-import com.pycogroup.pizza.order.model.Category;
-import com.pycogroup.pizza.order.model.Option;
 import com.pycogroup.pizza.order.model.Order;
-import com.pycogroup.pizza.order.model.Pricing;
-import com.pycogroup.pizza.order.model.Product;
-import com.pycogroup.pizza.order.model.Size;
 import com.pycogroup.pizza.order.model.UserInfo;
 import com.pycogroup.pizza.order.repository.OrderRepository;
 

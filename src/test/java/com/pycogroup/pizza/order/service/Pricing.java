@@ -1,4 +1,4 @@
-package com.pycogroup.pizza.order.model;
+package com.pycogroup.pizza.order.service;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.pycogroup.pizza.order.model;
+package com.pycogroup.pizza.order.service;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
