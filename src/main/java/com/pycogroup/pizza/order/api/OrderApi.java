@@ -40,7 +40,7 @@ public class OrderApi {
     Object response = orderService.createOrder(order);
     if (response instanceof GenericResponse) {
       
-      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(response).build(),
+      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(((GenericResponse) response).getData()).build(),
                                       headers,
                                       HttpStatus.CREATED);
     } else {

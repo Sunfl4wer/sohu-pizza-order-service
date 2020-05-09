@@ -50,7 +50,7 @@ public class OrderServiceTest {
                                   .email("peacefulman@gmail.com")
                                   .phoneNumber("777777")
                                   .address("1 Vu Dai village")
-                                  .paymentMethod("COD")
+                                  .method("COD")
                                   .build();
     List<Size> size = new ArrayList<Size>();
     size.add(Size.SMALL);

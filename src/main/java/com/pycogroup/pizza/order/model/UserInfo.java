@@ -25,7 +25,7 @@ public class UserInfo {
 
   @Getter
   @Setter
-  private String paymentMethod;
+  private String method;
 
   @Getter
   @Setter
