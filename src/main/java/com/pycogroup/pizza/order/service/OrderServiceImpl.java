@@ -27,10 +27,10 @@ public class OrderServiceImpl implements OrderService{
   @Override
   @LogExecutionStatus
   public GenericResponse createOrder(Order order) {
-    String cardNumber = "123456789";
-    String securityCode = "987654321";
+    String cardNumber = "123456";
+    String securityCode = "123456";
     Order createdOrder = null;
-    if (order.getUserInfo().getCardNumber() == cardNumber && order.getUserInfo().getSecurity() == securityCode) {
+    if (order.getUserInfo().getCardNumber().equals(cardNumber) && order.getUserInfo().getSecurity().equals(securityCode)) {
       createdOrder = orderRepository.save(order);
       if (orderRepository.existsById(createdOrder.getId())) {
         return new GenericResponse("Order Created Successfully!");
