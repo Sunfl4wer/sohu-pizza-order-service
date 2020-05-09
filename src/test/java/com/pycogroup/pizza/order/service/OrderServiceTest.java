@@ -12,11 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.pycogroup.pizza.order.common.GenericResponse;
-import com.pycogroup.pizza.order.dto.OrderDto;
-import com.pycogroup.pizza.order.dto.ProductDto;
 import com.pycogroup.pizza.order.model.AdditionalOption;
 import com.pycogroup.pizza.order.model.Category;
 import com.pycogroup.pizza.order.model.Option;
+import com.pycogroup.pizza.order.model.Order;
 import com.pycogroup.pizza.order.model.Pricing;
 import com.pycogroup.pizza.order.model.Product;
 import com.pycogroup.pizza.order.model.Size;
@@ -67,7 +66,7 @@ public class OrderServiceTest {
     List<Integer> optionPrice = new ArrayList<Integer>();
     optionPrice.add(0);
     optionPrice.add(40000);
-    ProductDto product = ProductDto.builder()
+    Product product = Product.builder()
                                  .name("Octopus Pizza")
                                  .imageURL("https://goodle.com/octopus")
                                  .pricing(new Pricing(size,price,0)) 
@@ -76,9 +75,9 @@ public class OrderServiceTest {
                                  .quantity(1)
                                  .id("5eb53755c9cb6804f57f9045")
                                  .build();
-    List<ProductDto> products = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
     products.add(product);
-    OrderDto order = new OrderDto(userInfo, products);
+    Order order = Order.builder().cartInfo(products).userInfo(userInfo).build();
     GenericResponse response = orderService.createOrder(order);
 
     // when

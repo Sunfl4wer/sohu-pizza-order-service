@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.pycogroup.pizza.order.common.GenericResponse;
 import com.pycogroup.pizza.order.common.ResponseDto;
-import com.pycogroup.pizza.order.dto.OrderDto;
+import com.pycogroup.pizza.order.model.Order;
 import com.pycogroup.pizza.order.service.OrderService;
 
 @CrossOrigin(origins="*", maxAge = 3600)
@@ -31,7 +31,7 @@ public class OrderApi {
       method=RequestMethod.POST, 
       consumes="application/JSON")
   public ResponseEntity<Object> createOrder(
-      @RequestBody OrderDto order,
+      @RequestBody Order order,
       UriComponentsBuilder ucb) {
     String baseUri = ucb.build().toString();
     HttpHeaders headers = new HttpHeaders();

@@ -1,19 +1,18 @@
 package com.pycogroup.pizza.order.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.pycogroup.pizza.order.dto.ProductDto;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Document(collection = "products")
 @Builder
 public class Product {
 
+  @Id
   @Getter
-  @Setter
   private String id;
 
   @Getter
@@ -23,6 +22,18 @@ public class Product {
   @Getter
   @Setter
   private String imageURL;
+  
+  @Getter
+  @Setter
+  private String description;
+
+  @Getter
+  @Setter
+  private String ingredients;
+
+  @Getter
+  @Setter
+  private String servingSize;
 
   @Getter
   @Setter
@@ -39,5 +50,4 @@ public class Product {
   @Getter
   @Setter
   private int quantity;
-
 }

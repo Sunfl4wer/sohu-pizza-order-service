@@ -16,10 +16,7 @@ import com.pycogroup.pizza.order.common.GenericResponseError;
 import com.pycogroup.pizza.order.common.LogExecutionStatus;
 import com.pycogroup.pizza.order.common.Message;
 import com.pycogroup.pizza.order.common.Reason;
-import com.pycogroup.pizza.order.dto.OrderDto;
-import com.pycogroup.pizza.order.dto.ProductDto;
 import com.pycogroup.pizza.order.model.Order;
-import com.pycogroup.pizza.order.model.Product;
 import com.pycogroup.pizza.order.repository.OrderRepository;
 
 @Service
@@ -30,10 +27,9 @@ public class OrderServiceImpl implements OrderService{
 
   @Override
   @LogExecutionStatus
-  public GenericResponse createOrder(OrderDto order) {
-    List<?> cartProducts = order.getCartInfo();
-    List<Product> products = ProductDto.toProductList(cartProducts);
-    Order createdOrder = orderRepository.save(Order.builder().userInfo(order.getUserInfo()).cartInfo(products).build());
+  public GenericResponse createOrder(Order order) {
+    Object cartProducts = order.getCartInfo();
+    Order createdOrder = orderRepository.save(Order.builder().userInfo(order.getUserInfo()).cartInfo(cartProducts).build());
     if (orderRepository.existsById(createdOrder.getId())) {
       return new GenericResponse("Order Created Successfully!");
     } else {
