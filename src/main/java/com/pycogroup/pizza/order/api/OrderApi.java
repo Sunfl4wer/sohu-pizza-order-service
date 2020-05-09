@@ -44,7 +44,7 @@ public class OrderApi {
     Object response = orderService.createOrder(order);
     Links links = new Links();
     links.add(LinkEntity.builder().href(locationUri).relation("Self").method(RequestMethod.POST).build());
-    if (response instanceof GenericResponse) {
+    if (!(response instanceof GenericResponseError)) {
       
       return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(((GenericResponse) response).getData()).links(links).build(),
                                       headers,
