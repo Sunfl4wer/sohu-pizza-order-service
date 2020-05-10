@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
     String cardNumber = "123456";
     String securityCode = "123456";
     String nameOnCard = "Sohu Pizza";
-    String expire = "07/2020";
+    String expire = "2020-07";
     Order createdOrder = null;
     if (order.getUserInfo().getMethod().equals("creditCard")) {
       if (order.getUserInfo().getCardNumber().equals(cardNumber) 
