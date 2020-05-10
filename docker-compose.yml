@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mongo_product:
+    container_name: mongo_order
+    image: mongo:latest
+    volumes:
+     - mongo_order:/data/db
+    ports:
+     - "27017:27017"
+    hostname: mongo_order
+
+
+  docker-order-service:
+    depends_on:
+     - mongo_order
+    image: docker-order-service:latest
+    ports:
+     - "9093:9093"
+    hostname: docker-order-service
+    links:
+     - mongo_order
+     
+volumes:
+  mongo_order:
+  
