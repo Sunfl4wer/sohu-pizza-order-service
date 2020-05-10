@@ -11,8 +11,8 @@ See the [wiki](https://github.com/Sunfl4wer/sohu-pizza-order-service/wiki) of th
 2. Build and run docker image
     1. Open powershell(window) or terminal(linux) change directory to the cloned local repository of this repository
     2. In the application-prod.properties
-        * Comment this [line](https://github.com/Sunfl4wer/sohu-pizza-order-service/blob/360d7f9eea5d8593731724b0571815832920b8ce/src/main/resources/application-prod.properties#L10)
-        * Uncomment this [line](https://github.com/Sunfl4wer/sohu-pizza-product-service/blob/360d7f9eea5d8593731724b0571815832920b8ce/src/main/resources/application-prod.properties#L9)
+        * Comment this [line](https://github.com/Sunfl4wer/sohu-pizza-order-service/blob/3a8131c3b0388b9dd12857bf92149de605b33f34/src/main/resources/application-prod.properties#L10)
+        * Uncomment this [line](https://github.com/Sunfl4wer/sohu-pizza-order-service/blob/3a8131c3b0388b9dd12857bf92149de605b33f34/src/main/resources/application-prod.properties#L9)
     3. Run this command `mvn package`
     4. Run this command `docker build -f Dockerfile -t docker-order-service .`
     5. Run this command `docker volume create mongo_order`. This will create a volume name _mongo_product_ in docker
