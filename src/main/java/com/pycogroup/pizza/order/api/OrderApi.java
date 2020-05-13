@@ -46,17 +46,17 @@ public class OrderApi {
     links.add(LinkEntity.builder().href(locationUri).relation("Self").method(RequestMethod.POST).build());
     if (!(response instanceof GenericResponseError)) {
       
-      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(((GenericResponse) response).getData()).links(links).build(),
+      return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.CREATED.value()).data(((GenericResponse) response).getData()).links(links.getLinks()).build(),
                                       headers,
                                       HttpStatus.CREATED);
     } else {
       ErrorResponseBody responseError = (ErrorResponseBody)((GenericResponseError) response).getData();
       if (responseError.getCode() == HttpStatus.UNAUTHORIZED.value()) {
-        return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.UNAUTHORIZED.value()).data(response).links(links).build(),
+        return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.UNAUTHORIZED.value()).data(response).links(links.getLinks()).build(),
                                       headers,
                                       HttpStatus.UNAUTHORIZED);
       } else {
-        return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).data(response).links(links).build(),
+        return new ResponseEntity<Object>(ResponseDto.builder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).data(response).links(links.getLinks()).build(),
                                       headers,
                                       HttpStatus.INTERNAL_SERVER_ERROR);
       }
